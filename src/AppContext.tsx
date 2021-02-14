@@ -21,7 +21,7 @@ export const AppContext = React.createContext<AppContextProps>({
   userName: "",
   userToken: "",
   darkMode: false,
-  setDarkMode: () => {},
+  setDarkMode: () => console.warn("setDarkMode not implemented"),
 });
 
 export const useAppContext = () => React.useContext(AppContext);
