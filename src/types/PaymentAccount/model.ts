@@ -4,6 +4,6 @@ export interface PaymentAccountViewModel extends BaseViewModel {
   readonly id: string;
   name: string;
   accountNumber: string;
-  accountNumberLast4: string;
+  readonly accountNumberLast4: string;
   routingNumber: string;
 }

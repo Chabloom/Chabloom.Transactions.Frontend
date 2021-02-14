@@ -7,5 +7,5 @@ export interface PaymentViewModel extends BaseViewModel {
   currency: string;
   paymentAccountId: string;
   paymentCardId: string;
-  complete: boolean;
+  readonly complete: boolean;
 }
