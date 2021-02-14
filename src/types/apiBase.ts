@@ -1,37 +1,24 @@
 import { BaseViewModel } from "./modelBase";
-import { UserService } from "./UserService";
 
 export interface BaseApiType<T extends BaseViewModel> {
-  readItems(): Promise<[Array<T> | undefined, string]>;
+  readItems(token: string): Promise<[Array<T> | undefined, string]>;
 
-  readItem(itemId: string): Promise<[T | undefined, string]>;
+  readItem(token: string, itemId: string): Promise<[T | undefined, string]>;
 
-  addItem(item: T): Promise<[T | undefined, string]>;
+  addItem(token: string, item: T): Promise<[T | undefined, string]>;
 
-  editItem(item: T): Promise<[T | undefined, string]>;
+  editItem(token: string, item: T): Promise<[T | undefined, string]>;
 
-  deleteItem(item: T): Promise<string | undefined>;
+  deleteItem(token: string, item: T): Promise<string | undefined>;
 }
 
 export class BaseApi<T extends BaseViewModel> {
-  userService: UserService;
-
-  constructor(userService: UserService) {
-    this.userService = userService;
-  }
-
-  _readItems = async (
-    url: string,
-    isAuthenticated: boolean = true
-  ): Promise<[Array<T> | undefined, string]> => {
+  _readItems = async (url: string, token: string, requireAuth = true): Promise<[Array<T> | undefined, string]> => {
     try {
       let response: Response;
-      if (isAuthenticated) {
+      if (requireAuth) {
         const headers = new Headers();
-        const user = await this.userService.getUser();
-        if (user) {
-          headers.append("Authorization", `Bearer ${user.access_token}`);
-        }
+        headers.append("Authorization", `Bearer ${token}`);
         response = await fetch(url, {
           method: "GET",
           headers: headers,
@@ -53,18 +40,12 @@ export class BaseApi<T extends BaseViewModel> {
     }
   };
 
-  _readItem = async (
-    url: string,
-    isAuthenticated: boolean = true
-  ): Promise<[T | undefined, string]> => {
+  _readItem = async (url: string, token: string, requireAuth = true): Promise<[T | undefined, string]> => {
     try {
       let response: Response;
-      if (isAuthenticated) {
+      if (requireAuth) {
         const headers = new Headers();
-        const user = await this.userService.getUser();
-        if (user) {
-          headers.append("Authorization", `Bearer ${user.access_token}`);
-        }
+        headers.append("Authorization", `Bearer ${token}`);
         response = await fetch(url, {
           method: "GET",
           headers: headers,
@@ -86,20 +67,13 @@ export class BaseApi<T extends BaseViewModel> {
     }
   };
 
-  _addItem = async (
-    url: string,
-    item: T,
-    isAuthenticated: boolean = true
-  ): Promise<[T | undefined, string]> => {
+  _addItem = async (url: string, token: string, item: T, requireAuth = true): Promise<[T | undefined, string]> => {
     try {
       let response: Response;
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
-      if (isAuthenticated) {
-        const user = await this.userService.getUser();
-        if (user) {
-          headers.append("Authorization", `Bearer ${user.access_token}`);
-        }
+      if (requireAuth) {
+        headers.append("Authorization", `Bearer ${token}`);
         response = await fetch(url, {
           method: "POST",
           headers: headers,
@@ -124,20 +98,13 @@ export class BaseApi<T extends BaseViewModel> {
     }
   };
 
-  _editItem = async (
-    url: string,
-    item: T,
-    isAuthenticated: boolean = true
-  ): Promise<[T | undefined, string]> => {
+  _editItem = async (url: string, token: string, item: T, requireAuth = true): Promise<[T | undefined, string]> => {
     try {
       let response: Response;
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
-      if (isAuthenticated) {
-        const user = await this.userService.getUser();
-        if (user) {
-          headers.append("Authorization", `Bearer ${user.access_token}`);
-        }
+      if (requireAuth) {
+        headers.append("Authorization", `Bearer ${token}`);
         response = await fetch(url, {
           method: "PUT",
           headers: headers,
@@ -162,18 +129,12 @@ export class BaseApi<T extends BaseViewModel> {
     }
   };
 
-  _deleteItem = async (
-    url: string,
-    isAuthenticated: boolean = true
-  ): Promise<string | undefined> => {
+  _deleteItem = async (url: string, token: string, requireAuth = true): Promise<string | undefined> => {
     try {
       let response: Response;
-      if (isAuthenticated) {
+      if (requireAuth) {
         const headers = new Headers();
-        const user = await this.userService.getUser();
-        if (user) {
-          headers.append("Authorization", `Bearer ${user.access_token}`);
-        }
+        headers.append("Authorization", `Bearer ${token}`);
         response = await fetch(url, {
           method: "DELETE",
           headers: headers,
