@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { UserManager } from "oidc-client";
 
-import { createMuiTheme, Grid, StylesProvider, ThemeProvider, useMediaQuery } from "@material-ui/core";
+import { createMuiTheme, StylesProvider, ThemeProvider, useMediaQuery } from "@material-ui/core";
 
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 import { ReactPlugin } from "@microsoft/applicationinsights-react-js";
@@ -14,6 +14,7 @@ import { AppInsightsInstrumentationKey, OidcSettings } from "./types";
 
 import "./App.scss";
 import { AppContext, AppContextProps } from "./AppContext";
+import { AppRoutes } from "./AppRoutes";
 
 const browserHistory = createBrowserHistory({ basename: "" });
 const reactPlugin = new ReactPlugin();
@@ -97,9 +98,7 @@ export const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <AppContext.Provider value={props}>
           <Router>
-            <Grid container alignItems="center" justifyItems="center" style={{ minHeight: "100vh" }}>
-              <Switch></Switch>
-            </Grid>
+            <AppRoutes />
           </Router>
         </AppContext.Provider>
       </ThemeProvider>
