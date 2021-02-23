@@ -3,7 +3,7 @@ import { UserManagerSettings } from "oidc-client";
 export const ApplicationConfig = {
   name: "chabloom-transactions",
   displayName: "Chabloom Transactions",
-  frontendPublicAddress: "http://transactions-dev-1.chabloom.com",
+  frontendPublicAddress: "https://transactions-dev-1.chabloom.com",
   backendPublicAddress: "https://transactions-api-dev-1.chabloom.com",
   accountsBackendPublicAddress: "https://accounts-api-dev-1.chabloom.com",
 };
