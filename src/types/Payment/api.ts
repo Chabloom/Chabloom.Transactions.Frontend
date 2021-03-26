@@ -7,7 +7,7 @@ export class PaymentsApi extends BaseApi<PaymentViewModel> implements BaseApiTyp
 
   constructor() {
     super();
-    this.baseUrl = `${ApplicationConfig.backendPublicAddress}/api/payments`;
+    this.baseUrl = `${ApplicationConfig.transactionsBackendPublicAddress}/api/payments`;
   }
 
   readItems(token: string): Promise<[Array<PaymentViewModel> | undefined, string]> {

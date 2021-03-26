@@ -9,7 +9,7 @@ export class PaymentAccountsApi
 
   constructor() {
     super();
-    this.baseUrl = `${ApplicationConfig.backendPublicAddress}/api/paymentAccounts`;
+    this.baseUrl = `${ApplicationConfig.transactionsBackendPublicAddress}/api/paymentAccounts`;
   }
 
   readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {
