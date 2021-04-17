@@ -12,6 +12,10 @@ export interface AppContextProps {
   userToken: string;
   darkMode: boolean;
   setDarkMode: (darkMode: boolean) => void;
+  productCounts: Map<string, number>;
+  setProductCounts: React.Dispatch<React.SetStateAction<Map<string, number>>>;
+  pickupMethod: string;
+  setPickupMethod: (pickupMethod: string) => void;
 }
 
 export const AppContext = React.createContext<AppContextProps>({
@@ -22,6 +26,10 @@ export const AppContext = React.createContext<AppContextProps>({
   userToken: "",
   darkMode: false,
   setDarkMode: () => console.warn("setDarkMode not implemented"),
+  productCounts: new Map<string, number>(),
+  setProductCounts: () => console.warn("setProductCounts not implemented"),
+  pickupMethod: "Shipping",
+  setPickupMethod: () => console.warn("setPickupMethod not implemented"),
 });
 
 export const useAppContext = (): AppContextProps => React.useContext(AppContext);
