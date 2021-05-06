@@ -1,13 +1,13 @@
-import { BaseApi, BaseApiType } from "../apiBase";
+import { AppConfiguration } from "../../config";
+import { BaseApi, BaseApiType } from "../../common";
 import { PaymentViewModel } from "./model";
-import { ApplicationConfig } from "../settings";
 
 export class PaymentsApi extends BaseApi<PaymentViewModel> implements BaseApiType<PaymentViewModel> {
   baseUrl: string;
 
   constructor() {
     super();
-    this.baseUrl = `${ApplicationConfig.transactionsBackendPublicAddress}/api/payments`;
+    this.baseUrl = `${AppConfiguration.transactionsBackendPublicAddress}/api/payments`;
   }
 
   readItems(token: string): Promise<[Array<PaymentViewModel> | undefined, string]> {

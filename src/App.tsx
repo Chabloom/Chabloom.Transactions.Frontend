@@ -1,15 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-
 import { UserManager } from "oidc-client";
-
 import { createMuiTheme, StylesProvider, ThemeProvider, useMediaQuery } from "@material-ui/core";
 
-import { OidcSettings } from "./types";
+import { AppContextBase, AppContextPropsBase } from "./common";
+import { OidcConfiguration } from "./config";
+
+import { AppRoutes } from "./AppRoutes";
 
 import "./App.scss";
-import { AppContext, AppContextProps } from "./AppContext";
-import { AppRoutes } from "./AppRoutes";
 
 export const App: React.FC = () => {
   const [userLoaded, setUserLoaded] = React.useState(false);
@@ -18,7 +16,7 @@ export const App: React.FC = () => {
   const [userToken, setUserToken] = React.useState("");
   const [darkMode, setDarkMode] = React.useState(false);
 
-  const userManager = React.useMemo(() => new UserManager(OidcSettings), []);
+  const userManager = React.useMemo(() => new UserManager(OidcConfiguration), []);
   React.useEffect(() => {
     userManager.events.addUserLoaded((user) => {
       setUserLoaded(true);
@@ -73,16 +71,14 @@ export const App: React.FC = () => {
     userToken: userToken,
     darkMode: darkMode,
     setDarkMode: setDarkMode,
-  } as AppContextProps;
+  } as AppContextPropsBase;
 
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <AppContext.Provider value={props}>
-          <Router>
-            <AppRoutes />
-          </Router>
-        </AppContext.Provider>
+        <AppContextBase.Provider value={props}>
+          <AppRoutes />
+        </AppContextBase.Provider>
       </ThemeProvider>
     </StylesProvider>
   );

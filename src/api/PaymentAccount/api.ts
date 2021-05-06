@@ -1,6 +1,6 @@
-import { BaseApi, BaseApiType } from "../apiBase";
+import { AppConfiguration } from "../../config";
+import { BaseApi, BaseApiType } from "../../common";
 import { PaymentAccountViewModel } from "./model";
-import { ApplicationConfig } from "../settings";
 
 export class PaymentAccountsApi
   extends BaseApi<PaymentAccountViewModel>
@@ -9,7 +9,7 @@ export class PaymentAccountsApi
 
   constructor() {
     super();
-    this.baseUrl = `${ApplicationConfig.transactionsBackendPublicAddress}/api/paymentAccounts`;
+    this.baseUrl = `${AppConfiguration.transactionsBackendPublicAddress}/api/paymentAccounts`;
   }
 
   readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {

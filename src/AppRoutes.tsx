@@ -1,17 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { SignInCallback, SignOutCallback } from "./components";
+import { SignInCallback, SignOutCallback, useAppContext } from "./common";
 
 export const AppRoutes: React.FC = () => {
+  const { userManager } = useAppContext();
+
   return (
     <Router>
       <Switch>
         <Route exact={true} path="/signin-oidc">
-          <SignInCallback />
+          <SignInCallback userManager={userManager} />
         </Route>
         <Route exact={true} path="/signout-oidc">
-          <SignOutCallback />
+          <SignOutCallback userManager={userManager} />
         </Route>
       </Switch>
     </Router>
