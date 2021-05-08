@@ -1,4 +1,4 @@
 timestamp=`date +%s`
-docker build -t chb-prod-1.chabloom.com:32000/chabloom-transactions-frontend:$timestamp -t chb-prod-1.chabloom.com:32000/chabloom-transactions-frontend:latest .
-docker push chb-prod-1.chabloom.com:32000/chabloom-transactions-frontend:$timestamp
-docker push chb-prod-1.chabloom.com:32000/chabloom-transactions-frontend:latest
+docker build -t mdcasey/chabloom-transactions-frontend:$timestamp -t mdcasey/chabloom-transactions-frontend:latest .
+docker push mdcasey/chabloom-transactions-frontend:$timestamp
+docker push mdcasey/chabloom-transactions-frontend:latest
