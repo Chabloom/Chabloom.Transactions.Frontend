@@ -1,4 +1,3 @@
-import { AppConfiguration } from "../../config";
 import { BaseApi, BaseApiType } from "../../common";
 import { PaymentAccountViewModel } from "./model";
 
@@ -9,7 +8,7 @@ export class PaymentAccountsApi
 
   constructor() {
     super();
-    this.baseUrl = `${AppConfiguration.transactionsBackendPublicAddress}/api/paymentAccounts`;
+    this.baseUrl = `${process.env.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`;
   }
 
   readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {
