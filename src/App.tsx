@@ -16,7 +16,11 @@ export const App: React.FC = () => {
   const [userToken, setUserToken] = React.useState("");
   const [darkMode, setDarkMode] = React.useState(false);
 
-  const userManager = React.useMemo(() => new UserManager(OidcConfiguration), []);
+  const oidcConfiguration = OidcConfiguration;
+  const envConfig = 'env-config';
+  import(envConfig)
+      .then(x => oidcConfiguration.authority = x.config.REACT_APP_ACCOUNTS_BACKEND_ADDRESS);
+  const userManager = React.useMemo(() => new UserManager(oidcConfiguration), []);
   React.useEffect(() => {
     userManager.events.addUserLoaded((user) => {
       setUserLoaded(true);
