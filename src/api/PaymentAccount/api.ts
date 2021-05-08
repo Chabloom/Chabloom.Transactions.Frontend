@@ -4,11 +4,13 @@ import { PaymentAccountViewModel } from "./model";
 export class PaymentAccountsApi
   extends BaseApi<PaymentAccountViewModel>
   implements BaseApiType<PaymentAccountViewModel> {
-  baseUrl: string;
+  baseUrl = "";
 
   constructor() {
     super();
-    this.baseUrl = `${process.env.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`;
+    const envConfig = 'env-config';
+    import(envConfig)
+        .then(x => this.baseUrl = `${x.config.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`);
   }
 
   readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {
