@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: chbprod.azurecr.io/chabloom-transactions-frontend
+  repository: mdcasey/chabloom-transactions-frontend
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
