@@ -8,7 +8,7 @@ export class PaymentAccountsApi
 
   constructor() {
     super();
-    this.baseUrl = `${(window as any).__env__.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`;
+    this.baseUrl = `${window.__env__.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`;
   }
 
   readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {
