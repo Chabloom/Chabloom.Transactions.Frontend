@@ -1,33 +1,16 @@
-import { BaseApi, BaseApiType } from "../../common";
+import { FullAPI } from "../api";
 import { PaymentAccountViewModel } from "./model";
 
-export class PaymentAccountsApi
-  extends BaseApi<PaymentAccountViewModel>
-  implements BaseApiType<PaymentAccountViewModel> {
-  baseUrl = "";
-
+export class PaymentAccountsAPI extends FullAPI<PaymentAccountViewModel> {
   constructor() {
-    super();
-    this.baseUrl = `${window.__env__.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`;
+    super(`${window.__env__.REACT_APP_TRANSACTIONS_BACKEND_ADDRESS}/api/paymentAccounts`);
   }
 
-  readItems(token: string): Promise<[Array<PaymentAccountViewModel> | undefined, string]> {
-    return this._readItems(`${this.baseUrl}`, token);
+  deleteViewModel(viewModel: PaymentAccountViewModel, token: string | undefined): Promise<boolean> {
+    return this._delete(`${this._baseUrl}/${viewModel.id}`, token);
   }
 
-  readItem(token: string, itemId: string): Promise<[PaymentAccountViewModel | undefined, string]> {
-    return this._readItem(`${this.baseUrl}/${itemId}`, token);
-  }
-
-  addItem(token: string, item: PaymentAccountViewModel): Promise<[PaymentAccountViewModel | undefined, string]> {
-    return this._addItem(`${this.baseUrl}`, token, item);
-  }
-
-  editItem(token: string, item: PaymentAccountViewModel): Promise<[PaymentAccountViewModel | undefined, string]> {
-    return this._editItem(`${this.baseUrl}/${item.id}`, token, item);
-  }
-
-  deleteItem(token: string, item: PaymentAccountViewModel): Promise<string | undefined> {
-    return this._deleteItem(`${this.baseUrl}/${item.id}`, token);
+  updateViewModel(viewModel: PaymentAccountViewModel, token: string | undefined): Promise<boolean> {
+    return this._update(`${this._baseUrl}/${viewModel.id}`, viewModel, token);
   }
 }

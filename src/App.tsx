@@ -2,7 +2,7 @@ import React from "react";
 import { UserManager } from "oidc-client";
 import { createMuiTheme, StylesProvider, ThemeProvider, useMediaQuery } from "@material-ui/core";
 
-import { AppContextBase, AppContextPropsBase } from "./common";
+import { AppContext, AppContextProps } from "./AppContext";
 import { OidcConfiguration } from "./config";
 
 import { AppRoutes } from "./AppRoutes";
@@ -71,14 +71,14 @@ export const App: React.FC = () => {
     userToken: userToken,
     darkMode: darkMode,
     setDarkMode: setDarkMode,
-  } as AppContextPropsBase;
+  } as AppContextProps;
 
   return (
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
-        <AppContextBase.Provider value={props}>
+        <AppContext.Provider value={props}>
           <AppRoutes />
-        </AppContextBase.Provider>
+        </AppContext.Provider>
       </ThemeProvider>
     </StylesProvider>
   );
