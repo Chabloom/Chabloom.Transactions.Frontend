@@ -1,6 +1,7 @@
 import React from "react";
 import { UserManager } from "oidc-client";
-import { createMuiTheme, StylesProvider, ThemeProvider, useMediaQuery } from "@material-ui/core";
+import { createTheme, ThemeProvider, useMediaQuery } from "@material-ui/core";
+import { StylesProvider } from "@material-ui/styles";
 
 import { AppContext, AppContextProps } from "./AppContext";
 import { OidcConfiguration } from "./config";
@@ -52,7 +53,7 @@ export const App: React.FC = () => {
 
   const theme = React.useMemo(
     () =>
-      createMuiTheme({
+      createTheme({
         palette: {
           mode: darkMode ? "dark" : "light",
         },
